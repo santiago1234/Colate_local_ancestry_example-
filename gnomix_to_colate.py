@@ -63,7 +63,11 @@ def convert_gnomix_to_colate(gnomix, poplabels):
 
     # Define sample and haplotype order
     sample_order = poplabels['sample'].tolist()
-    haplotypes_order = [f"{sample}_0" for sample in sample_order] + [f"{sample}_1" for sample in sample_order]
+    haplotypes_order = []
+
+    for sample in sample_order:
+        haplotypes_order.append(f"{sample}_0")
+        haplotypes_order.append(f"{sample}_1")
 
     # Convert haplotype columns from Gnomix format to Colate format
     for haplotype in haplotypes_order:
@@ -86,20 +90,19 @@ def write_assignments(pop_codes, colate_file, assignment):
     assignment.to_csv(colate_file, sep=' ', mode='a', index=False, header=False)
 
 
-if __name__ == "__main":
-    # Specify the paths to poplabels and gnomix files
-    poplabels_file = 'data/example.poplabels'
-    gnomix_file = 'data/example.msp'
-    out_colate = 'data/assignment.txt'
-    # Define a constant for the ancestry of interest
-    ANCESTRY_OF_INTEREST = 0
+print('Converting Gnomix to Colate format...')
+poplabels_file = 'data/example.poplabels'
+gnomix_file = 'data/example.msp'
+out_colate = 'data/assignment.txt'
+# Define a constant for the ancestry of interest
+ANCESTRY_OF_INTEREST = 0
 
-    # Load poplabels and gnomix data
-    poplabels = pd.read_csv(poplabels_file, sep=' ')
-    gnomix, _ = load_msp_file(gnomix_file)
+# Load poplabels and gnomix data
+poplabels = pd.read_csv(poplabels_file, sep=' ')
+gnomix, pop_codes = load_msp_file(gnomix_file)
 
-    # Convert Gnomix data to Colate format
-    assignment = convert_gnomix_to_colate(gnomix, poplabels)
+# Convert Gnomix data to Colate format
+assignment = convert_gnomix_to_colate(gnomix, poplabels)
 
-    # save
-    write_assignments(pop_codes, out_colate, assignment)
+# save
+write_assignments(pop_codes, out_colate, assignment)
