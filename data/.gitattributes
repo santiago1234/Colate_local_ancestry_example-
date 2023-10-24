@@ -1,0 +1,5 @@
+example.anc filter=lfs diff=lfs merge=lfs -text
+example.mut filter=lfs diff=lfs merge=lfs -text
+example.msp filter=lfs diff=lfs merge=lfs -text
+example.poplabels filter=lfs diff=lfs merge=lfs -text
+assignment.txt filter=lfs diff=lfs merge=lfs -text
