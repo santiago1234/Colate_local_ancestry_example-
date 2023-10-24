@@ -1,0 +1,24 @@
+# Data for a reproducible example
+
+PATH_TO_RELATE = '~/software/relate_v1.2.1_x86_64_static/'
+
+rule extract_subtrees:
+    input:
+        anc = '/data/users/smedina/genome-america/experiments/23-06-08-RUN-RELATE/results/gene-genealogies/genealogies_chr22.anc',
+        mut = '/data/users/smedina/genome-america/experiments/23-06-08-RUN-RELATE/results/gene-genealogies/genealogies_chr22.mut',
+        poplabs = '/data/users/smedina/genome-america/experiments/23-06-08-RUN-RELATE/data/popinfo.poplabels'
+    output:
+        'example.mut',
+        'example.anc',
+        'example.poplabels'
+    shell:
+        '''
+        {PATH_TO_RELATE}/bin/RelateExtract \
+            --mode SubTreesForSubpopulation \
+            --anc {input.anc} \
+            --mut {input.mut} \
+            --poplabels {input.poplabs} \
+            --pop_of_interest Yoruba,Pima,GBR \
+            -o example
+        '''
+    
