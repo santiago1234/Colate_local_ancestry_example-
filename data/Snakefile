@@ -8,8 +8,8 @@ rule extract_subtrees:
         mut = '/data/users/smedina/genome-america/experiments/23-06-08-RUN-RELATE/results/gene-genealogies/genealogies_chr22.mut',
         poplabs = '/data/users/smedina/genome-america/experiments/23-06-08-RUN-RELATE/data/popinfo.poplabels'
     output:
-        'example.mut',
-        'example.anc',
+        'example_chr22.mut',
+        'example_chr22.anc',
         'example.poplabels'
     shell:
         '''
@@ -19,6 +19,8 @@ rule extract_subtrees:
             --mut {input.mut} \
             --poplabels {input.poplabs} \
             --pop_of_interest Yoruba,Pima,GBR \
-            -o example
+            -o example_chr22
+
+        mv example_chr22.poplabels example.poplabels
         '''
     
