@@ -41,4 +41,7 @@ python gnomix_to_colate.py
   --bins 2,7,0.2 \
   --num_bootstraps 100 \
   --poplabels data/assignment.txt
+
+Rscript analysis.R
 ```
+
